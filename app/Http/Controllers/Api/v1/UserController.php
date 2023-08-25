@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\UserLoginRequest;
 
-class AdminController extends BaseController
+class UserController extends BaseController
 {
     /**
      * Handles user login.
      */
     public function login(UserLoginRequest $request)
     {
-        return $this->loginUser(true, $request);
+        return $this->loginUser(false, $request);
     }
 }
