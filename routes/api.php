@@ -32,6 +32,8 @@ Route::prefix('v1')->group(function () {
 
     // User routes
     Route::post('user/login', [UserController::class, 'login']);
+    Route::post('user/forgot-password', [UserController::class, 'forgotPassword']);
+    Route::post('user/reset-password-token', [UserController::class, 'resetPasswordToken']);
 
     Route::middleware([JwtMiddleware::class, UserCheckMiddleware::class])->prefix('user')->group(function () {
         Route::post('create', [UserController::class, 'create']);
