@@ -19,6 +19,7 @@ Before you start using this Laravel API Authentication and User Management proje
 - [Features](#features)
 - [Endpoints](#endpoints)
 - [Tests](#tests)
+- [API Documentation](#api-documentation)
 
 
 ## Getting Started
@@ -112,6 +113,24 @@ User Endpoints:
 - Edit User: `POST /api/v1/user/edit`
 - User Delete: `DELETE /api/v1/user`
 - User Logout: `GET /api/v1/user/logout`
+
+## API Documentation
+
+We've implemented Swagger API documentation to provide clear and interactive documentation for our APIs. To access the API documentation, follow these steps:
+
+Ensure your Laravel development server is running by executing the following command:
+```bash
+php artisan serve
+```
+Open your web browser and enter the appropriate URL based on your environment setup.
+
+This could be:
+
+- If you're using the default Laravel development server: http://127.0.0.1:8000/api/documentation
+
+- If you're using a virtual host or a custom domain: http://your-custom-domain/api/documentation
+
+  Replace your-custom-domain with the actual domain or IP address of your server.
 
 ## Tests
 The project includes comprehensive test coverage to ensure functionality and reliability. To run the tests:

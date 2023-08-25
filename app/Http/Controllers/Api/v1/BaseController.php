@@ -42,6 +42,27 @@ class BaseController extends Controller
     /**
      * Handles user logout.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/v1/admin/logout",
+     *     operationId="adminLogout",
+     *     summary="Admin Logout",
+     *     tags={"Admin"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="200", description="Logged out successfully", @OA\Schema()),
+     *     @OA\Response(response="401", description="Unauthorized", @OA\Schema()),
+     *     @OA\Response(response="403", description="Forbidden", @OA\Schema()),
+     * )
+     * @OA\Get(
+     *      path="/api/v1/user/logout",
+     *      operationId="logoutUser",
+     *      summary="Logout User",
+     *      tags={"User"},
+     *      security={{"bearerAuth":{}}},
+     *      @OA\Response(response="200", description="Logged out successfully", @OA\Schema()),
+     *      @OA\Response(response="401", description="Unauthorized", @OA\Schema()),
+     *  )
+     */
     public function logout(Request $request)
     {
         // Extract token from Authorization header
