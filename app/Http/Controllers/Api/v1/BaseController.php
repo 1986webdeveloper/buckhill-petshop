@@ -158,4 +158,37 @@ class BaseController extends Controller
         // Return a success response
         return apiResponse(['user' => $user], 'User account edited successfully', 200, true);
     }
+
+    /**
+     * Deletes a user account.
+     */
+    public function deleteUser($uuid)
+    {
+        // Find the user by UUID or return a not found response
+        try {
+            $user = User::where('uuid', $uuid)->firstOrFail();
+        } catch (ModelNotFoundException $exception) {
+            return apiResponse(null, 'User not found', 404, false);
+        }
+
+        // Admins cannot be deleted
+        if ($user->is_admin) {
+            return apiResponse(null, 'Admin accounts cannot be deleted', 403, false);
+        }
+
+        // Delete the associated avatar file if present
+        if ($user->avatar) {
+            $file = File::where('uuid', $user->avatar)->first();
+            if ($file) {
+                Storage::delete('public/' . $file->path);
+                $file->delete();
+            }
+        }
+
+        // Delete the user
+        $user->delete();
+
+        // Return a success response
+        return apiResponse(null, 'User account deleted successfully', 200, true);
+    }
 }

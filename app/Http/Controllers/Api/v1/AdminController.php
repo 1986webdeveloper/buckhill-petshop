@@ -31,4 +31,12 @@ class AdminController extends BaseController
     {
         return $this->editUser($request, $uuid);
     }
+
+    /**
+     * Deletes a user account.
+     */
+    public function delete($uuid)
+    {
+        return $this->deleteUser($uuid);
+    }
 }
