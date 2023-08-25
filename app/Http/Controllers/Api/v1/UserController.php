@@ -125,27 +125,6 @@ class UserController extends BaseController
     }
 
     /**
-     * Deletes current user account.
-     */
-    /**
-     * @OA\Delete(
-     *     path="/api/v1/user",
-     *     operationId="deleteUser",
-     *     summary="Delete User",
-     *     tags={"User"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Response(response="200", description="User account deleted successfully", @OA\Schema()),
-     *     @OA\Response(response="401", description="Unauthorized", @OA\Schema()),
-     *     @OA\Response(response="403", description="Forbidden", @OA\Schema()),
-     *     @OA\Response(response="404", description="User not found", @OA\Schema()),
-     * )
-     */
-    public function delete(Request $request)
-    {
-        return $this->deleteUser($request->user_uuid);
-    }
-
-    /**
      * provides current user details.
      */
     /**
@@ -261,5 +240,26 @@ class UserController extends BaseController
         PasswordReset::where('email', $request->email)->delete();
 
         return apiResponse(null, 'Password has been successfully updated', 200, true);
+    }
+
+    /**
+     * Deletes current user account.
+     */
+    /**
+     * @OA\Delete(
+     *     path="/api/v1/user",
+     *     operationId="deleteUser",
+     *     summary="Delete User",
+     *     tags={"User"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="200", description="User account deleted successfully", @OA\Schema()),
+     *     @OA\Response(response="401", description="Unauthorized", @OA\Schema()),
+     *     @OA\Response(response="403", description="Forbidden", @OA\Schema()),
+     *     @OA\Response(response="404", description="User not found", @OA\Schema()),
+     * )
+     */
+    public function delete(Request $request)
+    {
+        return $this->deleteUser($request->user_uuid);
     }
 }

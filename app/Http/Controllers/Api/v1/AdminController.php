@@ -24,7 +24,6 @@ use App\Models\User;
  *     securityScheme="bearerAuth",
  * )
  */
-
 class AdminController extends BaseController
 {
     /**

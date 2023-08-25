@@ -3,8 +3,8 @@
 use App\Http\Controllers\Api\v1\AdminController;
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Middleware\AdminCheckMiddleware;
-use App\Http\Middleware\UserCheckMiddleware;
 use App\Http\Middleware\JwtMiddleware;
+use App\Http\Middleware\UserCheckMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('throttle:30,1')->group(function () {
     // Admin routes
     Route::post('admin/login', [AdminController::class, 'login']);
 
