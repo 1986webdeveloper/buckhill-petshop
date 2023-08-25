@@ -91,24 +91,8 @@ class BaseController extends Controller
 
         // Handle avatar file upload if present
         if ($request->hasFile('avatar')) {
-            $avatarFile = $request->file('avatar');
-            $uuid       = Str::uuid();
-            $filename   = $uuid . '.' . $avatarFile->getClientOriginalExtension();
-            $filePath   = 'pet-shop/' . $filename;
-            // Store the avatar file
-            Storage::disk('public')->putFileAs('', $avatarFile, $filePath);
-
-            // create associated File record
-            $file = File::create([
-                'uuid' => $uuid,
-                'name' => $avatarFile->getClientOriginalName(),
-                'path' => $filePath,
-                'size' => $avatarFile->getSize(),
-                'type' => $avatarFile->getMimeType(),
-            ]);
-
             // Associate the file with the user's avatar
-            $user->avatar = $uuid;
+            $user->avatar = $this->fileUpload($request);
         }
 
         // Save the user
@@ -152,26 +136,8 @@ class BaseController extends Controller
                 }
             }
 
-            // Upload new avatar file and create associated File record
-            $avatarFile = $request->file('avatar');
-            $uuid       = Str::uuid();
-            $filename   = $uuid . '.' . $avatarFile->getClientOriginalExtension();
-            $filePath   = 'pet-shop/' . $filename;
-
-            // Store the avatar file
-            Storage::disk('public')->putFileAs('', $avatarFile, $filePath);
-
-            // create associated File record
-            $file = File::create([
-                'uuid' => $uuid,
-                'name' => $avatarFile->getClientOriginalName(),
-                'path' => $filePath,
-                'size' => $avatarFile->getSize(),
-                'type' => $avatarFile->getMimeType(),
-            ]);
-
             // Associate the file with the user's avatar
-            $user->avatar = $uuid;
+            $user->avatar = $this->fileUpload($request);
         }
 
         $user->save();
@@ -180,6 +146,24 @@ class BaseController extends Controller
         return apiResponse(['user' => $user], 'User account edited successfully', 200, true);
     }
 
+    protected function fileUpload($request){
+        $avatarFile = $request->file('avatar');
+        $uuid       = Str::uuid();
+        $filename   = $uuid . '.' . $avatarFile->getClientOriginalExtension();
+        $filePath   = 'pet-shop/' . $filename;
+        // Store the avatar file
+        Storage::disk('public')->putFileAs('', $avatarFile, $filePath);
+
+        // create associated File record
+        File::create([
+            'uuid' => $uuid,
+            'name' => $avatarFile->getClientOriginalName(),
+            'path' => $filePath,
+            'size' => $avatarFile->getSize(),
+            'type' => $avatarFile->getMimeType(),
+        ]);
+        return $uuid;
+    }
     /**
      * Deletes a user account.
      */

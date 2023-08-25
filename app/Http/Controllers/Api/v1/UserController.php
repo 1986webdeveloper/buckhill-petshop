@@ -222,7 +222,7 @@ class UserController extends BaseController
     public function resetPasswordToken(ResetPasswordRequest $request)
     {
         try {
-            $resetData = PasswordReset::where('email', $request->email)->where('token', $request->token)->firstOrFail();
+            PasswordReset::where('email', $request->email)->where('token', $request->token)->firstOrFail();
         } catch (ModelNotFoundException $exception) {
             return apiResponse(null, 'Invalid token', 400, false);
         }

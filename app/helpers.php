@@ -15,7 +15,6 @@ if ( ! function_exists('apiResponse')) {
     }
 }
 
-
 /**
  * Generates a JWT token for the user.
  */
@@ -37,9 +36,7 @@ if ( ! function_exists('generateToken')) {
         $privateKey = file_get_contents(base_path('jwtkeys/private_key.pem'));
 
         // Generate the JWT token
-        $token = JWT::encode($tokenPayload, $privateKey, 'RS256');
-
-        return $token;
+        return JWT::encode($tokenPayload, $privateKey, 'RS256');
     }
 }
 

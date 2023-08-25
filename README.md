@@ -137,3 +137,9 @@ The project includes comprehensive test coverage to ensure functionality and rel
 ```bash
 php artisan test
 ```
+
+## PHP Insights
+Feel free to use the php artisan insights command to analyze codebase health
+```bash
+php artisan insights
+```

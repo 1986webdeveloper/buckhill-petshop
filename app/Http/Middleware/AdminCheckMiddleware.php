@@ -15,7 +15,7 @@ class AdminCheckMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user_role == 'admin') {
+        if ($request->user_role === 'admin') {
             return $next($request);
         }
 

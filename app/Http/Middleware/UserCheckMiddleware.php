@@ -15,7 +15,7 @@ class UserCheckMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user_role == 'user') {
+        if ($request->user_role === 'user') {
             return $next($request);
         }
 
