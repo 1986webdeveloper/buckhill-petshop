@@ -23,6 +23,7 @@ Route::prefix('v1')->group(function () {
     Route::post('admin/login', [AdminController::class, 'login']);
 
     Route::middleware([JwtMiddleware::class, AdminCheckMiddleware::class])->prefix('admin')->group(function () {
+        Route::post('create', [AdminController::class, 'create']);
         Route::get('logout', [AdminController::class, 'logout']);
     });
 
@@ -30,6 +31,7 @@ Route::prefix('v1')->group(function () {
     Route::post('user/login', [UserController::class, 'login']);
 
     Route::middleware([JwtMiddleware::class, UserCheckMiddleware::class])->prefix('user')->group(function () {
+        Route::post('create', [UserController::class, 'create']);
         Route::get('logout', [UserController::class, 'logout']);
     });
 });
