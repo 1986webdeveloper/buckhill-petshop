@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\UserLoginRequest;
 
 class UserController extends BaseController
@@ -21,5 +22,13 @@ class UserController extends BaseController
     public function create(CreateUserRequest $request)
     {
         return $this->createUser(false, $request);
+    }
+
+    /**
+     * Edits current user's details.
+     */
+    public function edit(EditUserRequest $request)
+    {
+        return $this->editUser($request, $request->user_uuid);
     }
 }

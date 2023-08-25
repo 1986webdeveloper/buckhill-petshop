@@ -40,6 +40,12 @@ class JwtMiddleware
             $request->user_uuid = $decoded->user_uuid;
             $request->user_role = $decoded->user_role;
 
+            if (isset($request->route()->action['as']) && $request->route()->action['as'] == 'edit') {
+                $request->merge([
+                    'user_uuid' => $decoded->user_uuid,
+                ]);
+            }
+
             return $next($request);
         } catch (Exception $e) {
             return apiResponse(null, $e->getMessage(), 401, false);
