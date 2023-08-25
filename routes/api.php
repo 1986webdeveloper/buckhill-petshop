@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\v1\AdminController;
+use App\Http\Middleware\AdminCheckMiddleware;
+use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::post('admin/login', [AdminController::class, 'login']);
+
+    Route::middleware([JwtMiddleware::class, AdminCheckMiddleware::class])->prefix('admin')->group(function () {
+        Route::get('logout', [AdminController::class, 'logout']);
+    });
 });
+
