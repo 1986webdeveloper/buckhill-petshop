@@ -26,6 +26,7 @@ Route::prefix('v1')->group(function () {
         Route::post('create', [AdminController::class, 'create']);
         Route::post('user-edit/{uuid}', [AdminController::class, 'edit']);
         Route::delete('user-delete/{uuid}', [AdminController::class, 'delete']);
+        Route::get('user-listing', [AdminController::class, 'list']);
         Route::get('logout', [AdminController::class, 'logout']);
     });
 
@@ -36,6 +37,7 @@ Route::prefix('v1')->group(function () {
         Route::post('create', [UserController::class, 'create']);
         Route::post('edit', [UserController::class, 'edit'])->name('edit');
         Route::delete('', [UserController::class, 'delete']);
+        Route::get('', [UserController::class, 'userDetails']);
         Route::get('logout', [UserController::class, 'logout']);
     });
 });
